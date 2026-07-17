@@ -1,0 +1,34 @@
+{
+    "name": "web3e/crypto-gateway-php",
+    "description": "PHP SDK for the Web3e crypto payment gateway — request signing (v2) and webhook verification. Zero runtime dependencies.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["web3e", "crypto", "payment", "gateway", "usdt", "webhook", "checkout"],
+    "homepage": "https://web3e.cc",
+    "support": {
+        "source": "https://github.com/web3e-cc/crypto-gateway-php",
+        "issues": "https://github.com/web3e-cc/crypto-gateway-php/issues"
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-curl": "*",
+        "ext-hash": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Web3e\\Gateway\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Web3e\\Gateway\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "php tests/run.php"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
