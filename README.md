@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/web3e-cc/crypto-gateway-php/main/art/logo.png" width="96" alt="Web3e" />
+</p>
+
 # web3e/crypto-gateway-php
 
 PHP SDK for the **Web3e** crypto payment gateway. Zero runtime dependencies (just `ext-curl` +
