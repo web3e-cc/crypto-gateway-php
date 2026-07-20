@@ -67,7 +67,7 @@ check(
 // 4. Webhook verification (canonical "v1.{id}.{t}.{body}").
 $secret = 'whsec_test';
 $id = 'evt_123';
-$body = '{"order_id":"42","status":"finished"}';
+$body = '{"orderId":"42","status":"finished"}';
 $now = time();
 $goodMac = hash_hmac('sha256', 'v1.' . $id . '.' . $now . '.' . $body, $secret);
 $verifier = new WebhookVerifier($secret);

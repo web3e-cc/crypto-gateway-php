@@ -30,15 +30,15 @@ use Web3e\Gateway\Client;
 $client = new Client('gwk_public_id', 'api_secret', 'https://api.web3e.cc');
 
 $invoice = $client->createInvoice([
-    'order_id'       => '1001',
-    'order_amount'   => '49.90',
-    'order_currency' => 'USD',
-    'success_url'    => 'https://shop.example/thank-you',
-    'cancel_url'     => 'https://shop.example/cart',
-    'callback_url'   => 'https://shop.example/ipn/web3e',
+    'orderId'       => '1001',
+    'orderAmount'   => '49.90',
+    'orderCurrency' => 'USD',
+    'successUrl'    => 'https://shop.example/thank-you',
+    'cancelUrl'     => 'https://shop.example/cart',
+    'callbackUrl'   => 'https://shop.example/ipn/web3e',
 ]);
 
-header('Location: ' . $invoice['checkout_url']); // redirect the buyer
+header('Location: ' . $invoice['checkoutUrl']); // redirect the buyer
 ```
 
 ## Verify a webhook (IPN)
@@ -47,8 +47,8 @@ header('Location: ' . $invoice['checkout_url']); // redirect the buyer
 use Web3e\Gateway\WebhookVerifier;
 
 $raw       = file_get_contents('php://input');
-$webhookId = $_SERVER['HTTP_WEBHOOK_ID'] ?? '';
-$signature = $_SERVER['HTTP_WEBHOOK_SIGNATURE'] ?? '';
+$webhookId = $_SERVER['HTTP_SM_WEBHOOK_ID'] ?? '';
+$signature = $_SERVER['HTTP_SM_WEBHOOK_SIGNATURE'] ?? '';
 
 $verifier = new WebhookVerifier('your_webhook_secret');
 if (!$verifier->verify($raw, $webhookId, $signature)) {
@@ -56,7 +56,7 @@ if (!$verifier->verify($raw, $webhookId, $signature)) {
     exit;
 }
 $event = json_decode($raw, true);
-// mark $event['order_id'] paid when $event['status'] is finished/confirmed
+// mark $event['orderId'] paid when $event['status'] is finished/confirmed
 ```
 
 ## Test
