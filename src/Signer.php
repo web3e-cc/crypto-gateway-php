@@ -11,10 +11,11 @@ namespace Web3e\Gateway;
  * gateway-signature.service.ts):
  *
  *   canonical = METHOD "\n" PATH "\n" CANONICAL_QUERY "\n" TIMESTAMP "\n" NONCE "\n" SHA256_HEX(rawBody)
- *   X-Signature = "v1=" . hex( HMAC-SHA256(secret, canonical) )
+ *   SM-Signature = "v1=" . hex( HMAC-SHA256(secret, canonical) )
  *
- * Headers the server expects: X-Api-Key (public id), X-Timestamp (unix seconds),
- * X-Nonce (>= 16 chars, single-use), X-Signature ("v1=<hex>").
+ * Headers the server expects (universal SM- prefix): SM-Api-Key (public id), SM-Timestamp (unix seconds),
+ * SM-Nonce (>= 16 chars, single-use), SM-Signature ("v1=<hex>"). (Legacy X-* still works server-side during
+ * the migration window; SM- is canonical.)
  */
 final class Signer
 {
@@ -41,10 +42,10 @@ final class Signer
         $canonical = self::canonicalString($method, $path, $query, $timestamp, $nonce, $rawBody);
 
         return [
-            'X-Api-Key' => $publicId,
-            'X-Timestamp' => $timestamp,
-            'X-Nonce' => $nonce,
-            'X-Signature' => self::sign($this->secret, $canonical),
+            'SM-Api-Key' => $publicId,
+            'SM-Timestamp' => $timestamp,
+            'SM-Nonce' => $nonce,
+            'SM-Signature' => self::sign($this->secret, $canonical),
         ];
     }
 

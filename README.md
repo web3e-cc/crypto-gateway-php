@@ -11,7 +11,7 @@ It does two things:
 
 1. **Signs requests** to the public REST v1 API (v2 signing scheme: HMAC-SHA256 over
    `METHOD\nPATH\nQUERY\nTIMESTAMP\nNONCE\nSHA256(body)`, single-use nonce, `Idempotency-Key` on POST).
-2. **Verifies inbound webhooks** (`Webhook-Signature: v1,t=…,s1=…`, canonical `v1.{id}.{ts}.{body}`,
+2. **Verifies inbound webhooks** (`SM-Webhook-Signature: v1,t=…,s1=…`, canonical `v1.{id}.{ts}.{body}`,
    ±300s window, constant-time, rotation-aware).
 
 ## Install
